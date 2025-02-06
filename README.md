@@ -1,4 +1,4 @@
-# MarketTrend_AI
+# MarketTrend AI: Strategy & Analysis
 
 **MarketTrend AI** is a fintech-grade market analysis and forecasting tool designed to assist consultants in making strategic market expansion and investment decisions.
 
