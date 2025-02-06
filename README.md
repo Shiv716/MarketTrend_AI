@@ -78,5 +78,5 @@ In **Terminal-2**, Run Streamlit UI:
 </p>
 
 ## Sample Reports
-1. Technical sector specific:
-2. Finance sector specific: 
+1. [Technology sector specific](https://shiv716.github.io/MarketTrend_Reports/Tech_Report.pdf)
+2. [Finance sector specific](https://shiv716.github.io/MarketTrend_Reports/Finance_Report.pdf)
