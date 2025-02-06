@@ -29,11 +29,11 @@ Collaborated on a market expansion project for [Blackmont Consulting](https://ww
 
 1. Clone the repository:
     ```
-    git clone <https://github.com/Shiv716/Flare_Maze_generator.git>
+    git clone <https://github.com/Shiv716/MarketTrend_AI.git>
     ```
 2. Navigate to the project directory:
     ```
-    cd Maze_FlareIntern
+    cd MarketDir
     ```
 3. Build the Conda Environment
    ```
