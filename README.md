@@ -69,7 +69,7 @@ In **Terminal-2**, Run Streamlit UI:
  ```
 
 ## Dashboard 
-
+![Pg1](Images/pg1)
 
 ## Sample Reports
 
