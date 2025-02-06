@@ -2,7 +2,7 @@
 
 **MarketTrend AI** is a fintech-grade market analysis and forecasting tool designed to assist consultants in making strategic market expansion and investment decisions.
 
-Collaborated on a market expansion project for [Blackmont Consulting](https://www.blackmontconsulting.com) with a 5-member team, generating competitor analysis, market insights, and growth forecasts. Leveraged Cohere AI for predictive stock forecasting and Yahoo Finance API for real-time data. The project enhanced financial analysis and investment strategy development through AI-driven risk assessment and growth predictions.
+Contributed to a market expansion project for [Blackmont Consulting](https://www.blackmontconsulting.com), collaborating with a 5-member team by developing a market analysis software framework. The software supported the team by generating competitor analysis, market insights, and growth forecasts. Leveraged Cohere AI for predictive stock forecasting and Yahoo Finance API for real-time data. The project enhanced financial analysis and investment strategy development through AI-driven risk assessment and growth predictions.
 
 ## Features
 1. AI-Driven Growth Forecasting: Provides 6-month & 12-month growth predictions for selected stocks.
