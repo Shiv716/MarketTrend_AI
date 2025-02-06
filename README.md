@@ -74,7 +74,7 @@ In **Terminal-2**, Run Streamlit UI:
     <img src="Images/pg2.png" alt="Stock Chart" width="450" height = "248">
     <img src="Images/pg5.png" alt="Stock Chart" width="450" height = "248">
     <img src="Images/pg3.png" alt="Stock Chart" width="450">
-    <img src="Images/pg4.png" alt="Stock Chart" width="450" height = "205">
+    <img src="Images/pg4.png" alt="Stock Chart" width="450" height = "200">
 </p>
 
 ## Sample Reports
