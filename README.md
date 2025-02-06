@@ -50,7 +50,7 @@ Collaborated on a market expansion project for [Blackmont Consulting](https://ww
 
 ## Usage
 
-**Note: The project leverages Cohere API by default for AI-driven insights. If you wish to use a different AI engine, update the relevant configurations accordingly.**
+**Note: The project leverages Cohere API by default for AI-driven insights. If a different AI engine is to be used, the relevant configurations should be updated accordingly.**
 
 This project requires **two terminals** to be running simultaneously:
 
