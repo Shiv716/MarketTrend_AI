@@ -15,7 +15,7 @@ Collaborated on a market expansion project for [Blackmont Consulting](https://ww
 ## Requirements
 
 - Python 3.x
-- [Conda Environment](environment.yml)
+- [Conda Environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 - streamlit
 - numpy
 - plotly
