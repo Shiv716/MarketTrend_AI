@@ -14,15 +14,15 @@ Collaborated on a market expansion project for [Blackmont Consulting](https://ww
 
 ## Requirements
 
-- Python 3.x
+- `Python 3.x`
 - [Conda Environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
-- streamlit
-- numpy
-- plotly
-- pandas
-- requests
-- yfinance
-- cohere
+- `streamlit`
+- `numpy`
+- `plotly`
+- `pandas`
+- `requests`
+- `yfinance`
+- `cohere`
 
 
 ## Installation
