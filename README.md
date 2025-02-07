@@ -68,7 +68,7 @@ In **Terminal-2**, Run Streamlit UI:
     streamlit run MarketTrend_AI.py
  ```
 
-## Sample Dashboard 
+## Dashboard Features
 <p align="center">
     <img src="Images/pg1.png" alt="Stock Chart" width="450">
     <img src="Images/pg2.png" alt="Stock Chart" width="450" height = "248">
