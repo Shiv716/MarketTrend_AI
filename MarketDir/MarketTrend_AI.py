@@ -192,35 +192,53 @@ st.subheader("Enter Stock Tickers (Comma Separated)")
 user_input = st.text_area("Enter tickers:", "AAPL,MSFT,GOOGL")
 selected_tickers = [ticker.strip().upper() for ticker in user_input.split(",") if ticker.strip()]
 
-if st.button("Fetch Data"):
-    all_risk_data = {}
-    stock_data = {}
+# Session state variables initialisation - Optimized approach to avoid full-page reload
+if "all_risk_data" not in st.session_state:
+    st.session_state.all_risk_data = None
+if "stock_data" not in st.session_state:
+    st.session_state.stock_data = None
+if "market_insights" not in st.session_state:
+     st.session_state.market_insights = []
+if "fetch_triggered" not in st.session_state:
+    st.session_state.fetch_triggered = False
+
+
+# Function to trigger data fetch
+def fetch_data():
+    st.session_state.fetch_triggered = True
+
+
+# Fetch Data Button - Triggers fetch_data function
+st.button("Fetch Data", on_click=fetch_data)
+
+
+if st.session_state.fetch_triggered and selected_tickers:
     try:
         response = requests.post("http://127.0.0.1:5000/market-data", json={"tickers": selected_tickers})
         if response.status_code != 200:
             st.error(f"Error fetching data: {response.json().get('error', 'Unknown error')}")
         else:
-            all_risk_data = response.json()
-            stock_data = fetch_top_companies_stock(selected_tickers)
+            st.session_state.all_risk_data = response.json()
+            st.session_state.stock_data = fetch_top_companies_stock(selected_tickers)
     except requests.exceptions.RequestException as e:
         st.error(f"Network error fetching data: {e}")
     except ValueError:
         st.error("Invalid response received from server.")
 
-    if not all_risk_data:
+    if not st.session_state.all_risk_data:
         st.warning("No valid data available for selected tickers.")
     else:
         # Stock Performance & Risk Metrics Graph
         st.subheader("Stock Performance")
-        st.line_chart({ticker: data["Close"] for ticker, data in stock_data.items()})
+        st.line_chart({ticker: data["Close"] for ticker, data in st.session_state.stock_data.items()})
         # st.table(calculate_risk_metrics(stock_data))
 
-        # 📈 **Growth Potential Graph for Selected Companies**
+        # 📈Growth Potential Graph for Selected Companies
         st.subheader("Growth Rate")
 
         # Computing growth over the last {period} months
         growth_data = {}
-        for ticker, data in stock_data.items():
+        for ticker, data in st.session_state.stock_data.items():
             if not data.empty:
                 start_price = data["Close"].iloc[0]  # First available price
                 end_price = data["Close"].iloc[-1]  # Latest price
@@ -256,7 +274,7 @@ if st.button("Fetch Data"):
         st.subheader("Risk Metrics")
 
         fig = go.Figure()
-        for ticker, data in all_risk_data.items():
+        for ticker, data in st.session_state.all_risk_data.items():
             if "error" in data:
                 st.warning(f"{ticker}: {data['error']}")
                 continue
@@ -269,7 +287,7 @@ if st.button("Fetch Data"):
                           xaxis=dict(tickangle=-45, automargin=True)
                           )
         st.plotly_chart(fig)
-        risk_table = pd.DataFrame.from_dict(all_risk_data, orient='index').reset_index()
+        risk_table = pd.DataFrame.from_dict(st.session_state.all_risk_data, orient='index').reset_index()
 
         risk_table = risk_table.rename(
             columns={"index": "Company", "current_price": "Current Price ($)", "VaR_95": "Value at Risk (95%)",
@@ -321,32 +339,33 @@ if st.button("Fetch Data"):
 
         if selected_tickers:
             for ticker in selected_tickers:
-                try:
-                    # Fetch insights from Flask API
-                    insight_response = requests.get(f"{FLASK_API_URL}/sentiment-insights?keyword={ticker}")
+                if ticker not in st.session_state.market_insights:
+                    try:
+                        # Fetch insights from Flask API
+                        insight_response = requests.get(f"{FLASK_API_URL}/sentiment-insights?keyword={ticker}")
 
-                    # Debugging: Print API response
-                    print(f"DEBUG: API response for {ticker}:", insight_response.text)
+                        # Debugging: Print API response
+                        print(f"DEBUG: API response for {ticker}:", insight_response.text)
 
-                    # Checking if the response is valid
-                    if insight_response.status_code != 200 or not insight_response.text.strip():
-                        st.warning(f"⚠️ No detailed insights available for {ticker}. API returned no data.")
-                    else:
-                        # Convert response to JSON
-                        insight_data = insight_response.json()
-
-                        if "error" in insight_data:
-                            st.warning(f"⚠️ No insights available for {ticker}: {insight_data['error']}")
+                        # Checking if the response is valid
+                        if insight_response.status_code != 200 or not insight_response.text.strip():
+                            st.warning(f"⚠️ No detailed insights available for {ticker}. API returned no data.")
                         else:
-                            insight_text = insight_data.get("insight_text", "No detailed insight provided.")
-                            # key_sentence = insight_data.get("key_sentence", "No key sentence extracted.")
+                            # Convert response to JSON
+                            insight_data = insight_response.json()
 
-                            st.markdown(f"<h5>📌 Key-Insights for {ticker}</h5>", unsafe_allow_html=True)
-                            st.info(f"{insight_text}")
-                            # st.write(f"**Key Sentence:** \"{key_sentence}\"")
+                            if "error" in insight_data:
+                                st.warning(f"⚠️ No insights available for {ticker}: {insight_data['error']}")
+                            else:
+                                insight_text = insight_data.get("insight_text", "No detailed insight provided.")
+                                # key_sentence = insight_data.get("key_sentence", "No key sentence extracted.")
 
-                except Exception as e:
-                    st.error(f"❌ Error fetching sentiment insights for {ticker}: {str(e)}")
+                                st.markdown(f"<h5>📌 Key-Insights for {ticker}</h5>", unsafe_allow_html=True)
+                                st.info(f"{insight_text}")
+                                # st.write(f"**Key Sentence:** \"{key_sentence}\"")
+
+                    except Exception as e:
+                        st.error(f"❌ Error fetching sentiment insights for {ticker}: {str(e)}")
 
         # Part-2
 
