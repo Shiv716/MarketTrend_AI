@@ -16,13 +16,14 @@ Contributed to a market expansion project for [Blackmont Consulting](https://www
 
 - `Python 3.x`
 - [Conda Environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
-- `streamlit`
-- `numpy`
-- `plotly`
+- `Streamlit`
+- `NumPy`
+- `Plotly`
 - `pandas`
 - `requests`
 - `yfinance`
-- `cohere`
+- `Cohere`
+- `Flask`
 
 
 ## Installation
